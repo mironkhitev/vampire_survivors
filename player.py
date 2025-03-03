@@ -1,6 +1,8 @@
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_SPEED, WHITE, RED, GREEN
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_SPEED, WHITE, RED, GREEN, EACH_NUM_LEVEL_UP_UPGRADE_STUFF, \
+    XP_TO_LEVEL
 from weapon import Weapon, WeaponType
+
 
 class Player:
     def __init__(self):
@@ -15,11 +17,10 @@ class Player:
         self.health = 100
         self.level = 1
         self.xp = 0
-        self.xp_to_level = 100
+        self.xp_to_level = XP_TO_LEVEL
         self.kills = 0
         self.gems = 0
         self.invulnerable = 0  # Invulnerability frames
-        self.levelup_points = 0
 
     def update(self, keys, enemies):
         # Movement
@@ -86,15 +87,12 @@ class Player:
         self.level += 1
         self.xp -= self.xp_to_level
         self.xp_to_level = int(self.xp_to_level * 1.5)
-        self.levelup_points += 1
         # Heal on level up
         self.max_health += 20
         self.health = self.max_health
 
-        # Every 3 levels, get a new weapon or upgrade existing
-        if self.level % 3 == 0:
-            return True  # Signal to show upgrade menu
-        return False
+        # Every LEVEL_UP_NUM levels, get a new weapon or upgrade existing
+        return self.level % EACH_NUM_LEVEL_UP_UPGRADE_STUFF == 0
 
     def add_gem(self):
         self.gems += 1

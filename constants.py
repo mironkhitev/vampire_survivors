@@ -2,6 +2,7 @@ import pygame
 from enum import Enum
 
 # Game constants
+EACH_NUM_LEVEL_UP_UPGRADE_STUFF = 1
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 PLAYER_SPEED = 5
@@ -24,3 +25,6 @@ class WeaponType(Enum):
     KNIFE = 1
     AXE = 2
     MAGIC = 3
+
+# Player parameters
+XP_TO_LEVEL = 1 #100
