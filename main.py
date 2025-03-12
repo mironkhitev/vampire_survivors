@@ -2,7 +2,7 @@ import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from game import Game
 # Initialize pygame
-from ui import UI
+# from ui import UI
 
 pygame.init()
 
@@ -33,12 +33,12 @@ def main():
 
                 # Upgrade menu controls
                 elif game.show_upgrade_menu:
-                    game.generate_upgrade_options()
                     if event.key in [pygame.K_1, pygame.K_2, pygame.K_3] and len(
                             game.upgrade_options) >= event.key - pygame.K_0:
                         option_index = event.key - pygame.K_1
                         if 0 <= option_index < len(game.upgrade_options):
                             game.apply_upgrade(game.upgrade_options[option_index])
+                            game.upgrade_options = []
                             game.show_upgrade_menu = False
 
                 # Pause control

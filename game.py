@@ -1,11 +1,12 @@
-import pygame
 import random
 
+import pygame
+
+from constants import FPS, WeaponType, MIN_ENEMIES, ENEMY_SPAWN_RATE, BLACK
 from enemy import Enemy
 from player import Player
-from weapon import Weapon
-from constants import FPS, WeaponType, MIN_ENEMIES, ENEMY_SPAWN_RATE, SCREEN_WIDTH, BLACK
 from ui import UI
+from weapon import Weapon
 
 
 class Game:
@@ -24,6 +25,8 @@ class Game:
         self.ui = UI(self)
 
     def generate_upgrade_options(self):
+        if len(self.upgrade_options) > 0:
+            return
         options = []
 
         # Option 1: New weapon if < 3 weapons, otherwise upgrade random weapon
@@ -66,7 +69,7 @@ class Game:
 
         # Randomly select 3 different options
         if len(options) > 3:
-            return random.sample(options, 3)
+            options =  random.sample(options, 3)
         self.upgrade_options = options
         return options
 
@@ -151,6 +154,7 @@ class Game:
 
         # Draw upgrade menu
         if self.show_upgrade_menu:
+            self.generate_upgrade_options()
             self.ui.draw_upgrade_menu(screen)
         #     self.generate_upgrade_options()
         #     self.apply_upgrade()

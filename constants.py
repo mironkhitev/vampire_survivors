@@ -27,4 +27,4 @@ class WeaponType(Enum):
     MAGIC = 3
 
 # Player parameters
-XP_TO_LEVEL = 1 #100
+XP_TO_LEVEL = 100
